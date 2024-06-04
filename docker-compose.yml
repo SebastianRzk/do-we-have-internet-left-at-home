@@ -7,6 +7,7 @@ services:
       - /home/svl/influxdb2:/var/lib/influxdb2:rw
     ports:
       - "8086:8086"
+  #The service "web" is for demonstration purposes only
   web:
     image: nginx
     volumes:
