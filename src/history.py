@@ -27,7 +27,6 @@ class HistoryEvent:
         self.event_name = event_name
         self.timestamp = timestamp
         self.value = value
-        logging.info("Creating %s>%s %s at %s", event_category_name, event_name, value, timestamp)
 
     @staticmethod
     def from_uptime_status(uptime_status: UptimeStatus):
@@ -74,8 +73,20 @@ class History:
 
     @staticmethod
     def from_dict(history_file_content: dict) -> 'History':
+        relevant_history = history_file_content[HISTORY_FILE_EVENTS_NAME]
+        logging.info("history length: %s", len(relevant_history))
+        if len(relevant_history) > 2*30*2+1:
+            '''
+            Prune after 2 hours
+            '''
+            logging.warning("Longer downtime, pruning list")
+            logging.warning("history size before %s", len(relevant_history))
+            first_part = relevant_history[0:1*30*2+1:1]
+            last_part = relevant_history[-6::1]
+            relevant_history = first_part + last_part
+            logging.warning("history size after %s", len(relevant_history))
         return History().with_events(
-            [HistoryEvent.from_dict(i) for i in history_file_content[HISTORY_FILE_EVENTS_NAME]]
+            [HistoryEvent.from_dict(i) for i in relevant_history]
         )
 
     def add_event(self, event: HistoryEvent):
