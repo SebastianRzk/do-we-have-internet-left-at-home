@@ -14,8 +14,7 @@ services:
      - ./data:/var/www/
      - ./nginx.conf:/etc/nginx/conf.d/default.conf
   local-importer:
-    image: sebastianrzk/do-we-have-internet-left-at-home:latest-amd64
-    #image: sebastianrzk/do-we-have-internet-left-at-home:latest-arm64 <- For rpi
+    build: .
     environment:
       # Insert your influx config here
       - INFLUX_BUCKET_NAME=
