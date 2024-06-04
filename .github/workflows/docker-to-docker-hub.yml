@@ -39,7 +39,7 @@ jobs:
           platforms: linux/amd64
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/do-we-have-internet-left-at-home:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/do-we-have-internet-left-at-home:latest-amd64
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
@@ -52,6 +52,6 @@ jobs:
           platforms: linux/arm64
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/do-we-have-internet-left-at-home:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/do-we-have-internet-left-at-home:latest-arm64
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
