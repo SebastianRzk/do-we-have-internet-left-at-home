@@ -75,14 +75,14 @@ class History:
     def from_dict(history_file_content: dict) -> 'History':
         relevant_history = history_file_content[HISTORY_FILE_EVENTS_NAME]
         logging.info("history length: %s", len(relevant_history))
-        if len(relevant_history) > 2*30*2+1:
+        if len(relevant_history) > 2*30*3+1:
             '''
             Prune after 2 hours
             '''
             logging.warning("Longer downtime, pruning list")
             logging.warning("history size before %s", len(relevant_history))
-            first_part = relevant_history[0:1*30*2+1:1]
-            last_part = relevant_history[-6::1]
+            first_part = relevant_history[0:1*30*3+1:1]
+            last_part = relevant_history[-9::1]
             relevant_history = first_part + last_part
             logging.warning("history size after %s", len(relevant_history))
         return History().with_events(
