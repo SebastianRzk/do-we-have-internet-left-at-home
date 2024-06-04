@@ -1,6 +1,6 @@
 # Do we have internet left at home
 
-Monitor your home internet connection and report the results of an InfluxDb. Even remotely.
+Monitor your home internet connection and report the results into an InfluxDb. Even remotely.
 
 
 ## Features
